@@ -22,7 +22,6 @@ Usage() {
   echo "    --bazel-cache-download-only    Use Bazel build cache in download mode only. No cache upload"
 }
 
-PYVER=3.8
 CONFIGONLY=0
 NOCONFIG=0
 NOCLEAN=0
@@ -69,8 +68,9 @@ export TF_ENABLE_XLA=1
 export TF_NEED_HDFS=0
 export TF_NEED_MKL=1
 export TF_NEED_NUMA=1
-#export CC_OPT_FLAGS="-march=sandybridge -mtune=broadwell -Wno-sign-compare"
+# export CC_OPT_FLAGS="-march=sandybridge -mtune=broadwell -Wno-sign-compare"
 export CC_OPT_FLAGS="-march=skylake -mtune=skylake -Wno-sign-compare"
+# export CC_OPT_FLAGS="-march=x86-64-v4 -Wno-sign-compare"
 
 THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 export PYTHON_BIN_PATH=$(which python)
@@ -98,7 +98,7 @@ echo "Bazel Cache Flag: $BAZEL_CACHE_FLAG"
 
 export OUTPUT_DIRS="tensorflow/python/kernel_tests tensorflow/compiler/tests /tmp/pip /usr/local/lib/tensorflow"
 export BUILD_OPTS="${THIS_DIR}/nvbuildopts"
-export IN_CONTAINER="1"
+export IN_CONTAINER="0"
 export TESTLIST
 export TRITON
 export NOCLEAN

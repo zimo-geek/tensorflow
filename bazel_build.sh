@@ -100,7 +100,8 @@ if [ ${PIP_PACKAGE_RETURN} -gt 0 ]; then
   exit ${PIP_PACKAGE_RETURN}
 fi
 
-pip install --no-cache-dir --upgrade $WHL_OUT/tensorflow-*.whl
+pip install --no-cache-dir --upgrade $WHL_OUT/tensorflow-*.whl \
+    -i https://pypi.doubanio.com/simple
 PIP_INSTALL_RETURN=$?
 if [ ${PIP_INSTALL_RETURN} -gt 0 ]; then
   echo "Installation of TF pip package failed."

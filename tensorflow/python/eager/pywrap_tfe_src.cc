@@ -1319,7 +1319,11 @@ static PyTypeObject TFE_Py_Tape_Type = {
     sizeof(TFE_Py_Tape),                          /* tp_basicsize */
     0,                                            /* tp_itemsize */
     &TFE_Py_Tape_Delete,                          /* tp_dealloc */
-    nullptr,                                      /* tp_print */
+    #if PY_VERSION_HEX < 0x03080000
+        nullptr, /* tp_print */
+    #else
+        0, /* tp_vectorcall_offset */
+    #endif
     nullptr,                                      /* tp_getattr */
     nullptr,                                      /* tp_setattr */
     nullptr,                                      /* tp_reserved */
@@ -1353,7 +1357,11 @@ static PyTypeObject TFE_Py_ForwardAccumulator_Type = {
     sizeof(TFE_Py_ForwardAccumulator),                      /* tp_basicsize */
     0,                                                      /* tp_itemsize */
     &TFE_Py_ForwardAccumulatorDelete,                       /* tp_dealloc */
-    nullptr,                                                /* tp_print */
+    #if PY_VERSION_HEX < 0x03080000
+        nullptr, /* tp_print */
+    #else
+        0, /* tp_vectorcall_offset */
+    #endif
     nullptr,                                                /* tp_getattr */
     nullptr,                                                /* tp_setattr */
     nullptr,                                                /* tp_reserved */

@@ -86,7 +86,11 @@ PyTypeObject TensorReleaserType = {
     0,                                /* tp_itemsize */
     /* methods */
     TensorReleaser_dealloc,      /* tp_dealloc */
-    nullptr,                     /* tp_print */
+#if PY_VERSION_HEX < 0x03080000
+    nullptr, /* tp_print */
+#else
+    0, /* tp_vectorcall_offset */
+#endif
     nullptr,                     /* tp_getattr */
     nullptr,                     /* tp_setattr */
     nullptr,                     /* tp_compare */
